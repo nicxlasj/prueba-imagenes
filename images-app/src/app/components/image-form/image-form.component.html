@@ -2,13 +2,11 @@
 <div class="mx-40">
     @if (image.IdImagen != 0) {
         <div class="mb-5">
-            <label for="email" class="block mb-2 text-sm font-medium text-gray-900"
-              >Tipo Imagen</label
-            >
+            
             <label for="countries" class="block mb-2 text-sm font-medium text-gray-900"
               >Visualización de imagen</label
             >
-            <img [src]="image.ImagenSerializada">
+            <img [src]="this.image.ImagenSerializada">
           </div>
     }
   <div class="mb-5">
@@ -18,11 +16,11 @@
     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900"
       >Select an option</label
     >
-    <select
+    <select 
       id="countries"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
     >
-      <option selected>Paisajes</option>
+      <option>Paisajes</option>
       <option>Comida</option>
     </select>
   </div>
@@ -41,8 +39,14 @@
   </div>
   <button (click)="sendImage()"
     type="submit"
-    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+    class="text-white bg-blue-700 hover:cursor-pointer hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
   >
     Guardar imagen 
+  </button>
+  <button (click)="deleteImage(this.image.IdImagen)"
+    type="submit"
+    class="text-white ml-5 bg-red-700 hover:cursor-pointer hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+  >
+    Borrar imagen
   </button>
 </div>

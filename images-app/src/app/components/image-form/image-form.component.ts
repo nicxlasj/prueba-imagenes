@@ -3,6 +3,8 @@ import { Imagen } from '../../models/imagen';
 import { ActivatedRoute } from '@angular/router';
 import { ImageService } from '../../services/image.service';
 
+
+
 @Component({
   selector: 'app-image-form',
   standalone: false,
@@ -13,6 +15,8 @@ export class ImageFormComponent implements OnInit {
     private route: ActivatedRoute,
     private imageService: ImageService
   ) {}
+  valTipoImagen: number = 1;
+  
   image: Imagen = {
     FechaActualizacion: new Date(),
     FechaCreacion: new Date(),
@@ -28,11 +32,16 @@ export class ImageFormComponent implements OnInit {
       if (this.idImage != null) {
         this.imageService.getImage(parseInt(this.idImage)).subscribe(data=> {
           this.image = data[0];
-          this.image.ImagenSerializada= this.image.ImagenSerializada.replace('\\','/')
-          console.log(this.image);
+          console.log(this.image.ImagenSerializada);
         });
       }
     });
+  }
+
+  change(event: Event) { 
+    const htmlElement = event.target as HTMLSelectElement;
+    console.log(htmlElement)
+    
   }
 
   setImageFile(event: Event) {
@@ -42,8 +51,18 @@ export class ImageFormComponent implements OnInit {
     
   }
 
+  deleteImage(id: number) {
+    this.imageService.deleteImage(id);
+  }
+
   sendImage() { 
-    console.log(this.image)
+
+    if(this.valTipoImagen == 1) {
+      this.image.IdTipoImagen = 1;
+    }
+    else { 
+      this.image.IdTipoImagen = 2;
+    } 
     this.imageService.saveImages(this.image).subscribe(data=> {
       console.log(data);
     });
